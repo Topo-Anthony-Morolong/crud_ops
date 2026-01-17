@@ -1,9 +1,9 @@
 /**
  * Server Configuration
  */
-import mongoose_ from "mongoose"
 import express_  from "express"
 import dotenv from "dotenv"
+import connectDB from "./src/models/db.js";
 
 
 const app = express_();
@@ -11,18 +11,17 @@ const app = express_();
 
 dotenv.config();
 const PORT = process.env.PORT || 5010;
-const MONDGO_uRL = process.env.MONGODB_url;
+;
 
 /**
  * Database connectivity
  */
-mongoose_
-.connect(MONDGO_uRL)
+
+connectDB()
 .then(()=>{
-        console.log("db connection successfull.")
-        app.listen(PORT, ()=>{
+     app.listen(PORT, ()=>{
             console.log(`Server is running on port ${PORT}`)
-        })
+        });
 })
 .catch((error)=>console.log(error));
 
